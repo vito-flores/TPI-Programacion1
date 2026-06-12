@@ -6,23 +6,48 @@ import validaciones
 
 
 def agregar_pais(lista_paises):
-    nombre = validaciones.validar_texto(input("Ingrese el nombre del país: "))
-    poblacion = validaciones.validar_numero(input("Ingrese la población del país: "))
-    superficie = validaciones.validar_numero(input("Ingrese la superficie del país: "))
-    continente = validaciones.validar_continente(input("Ingrese el continente del país: "))
+    while True:
+        try:
+            nombre = validaciones.validar_texto(input("Ingrese el nombre del país: "))
+            if not nombre or nombre.strip() == "" or not nombre.isalpha():
+                print("El nombre no puede estar vacío ni contener caracteres no alfabéticos.")
+                continue
 
-    # Creamos el país con todos los datos validados
-    nuevo_pais = { 
-        "nombre": nombre.capitalize(),
-        "poblacion": poblacion,
-        "superficie": superficie,
-        "continente": continente.capitalize()
-    }
+            poblacion = int(input("Ingrese la población del país: "))
+            if poblacion <= 0:
+                print("La población debe ser un número positivo.")
+                continue
 
-    # Agregamos el país a la lista y confirmamos
-    lista_paises.append(nuevo_pais)
-    return lista_paises
+            superficie = int(input("Ingrese la superficie del país en km²: "))
+            if superficie <= 0:
+                print("La superficie debe ser un número positivo.")
+                continue
 
+            continente = validaciones.validar_continente(input("Ingrese el continente del país: ").capitalize())
+            if continente is None:
+                continue
+
+        except ValueError:
+            print("Error: ingresá solo números enteros.")
+            continue
+
+        # Si llegamos acá todos los datos son válidos
+
+        # Verificamos que el país no exista ya en la lista
+        for pais in lista_paises:
+            if pais["nombre"].lower() == nombre.lower():
+                print(f"El país '{nombre.capitalize()}' ya existe en la lista.")
+                return lista_paises
+            
+        nuevo_pais = {
+            "nombre": nombre.capitalize(),
+            "poblacion": poblacion,
+            "superficie": superficie,
+            "continente": continente.capitalize()
+        }
+        lista_paises.append(nuevo_pais)
+        print(f"País '{nombre.capitalize()}' agregado correctamente.")
+        return lista_paises
 
 
 def actualizar_pais(lista_paises):
