@@ -1,15 +1,21 @@
 def buscar_pais(paises):
 
-    texto = input("Nombre: ").strip().lower()
+    while True:
 
-    if not texto:
-        print("Debe ingresar un nombre.")
-        return []
+        texto = input("Nombre: ").strip()
+
+        if not texto:
+            print("Debe ingresar un nombre.")
+            continue
+
+        break
 
     encontrados = []
 
     for pais in paises:
-        if texto in pais["nombre"].lower():
+
+        if texto.lower() in pais["nombre"].lower():
+
             encontrados.append(pais)
 
     return encontrados
@@ -17,11 +23,34 @@ def buscar_pais(paises):
 
 def filtrar_continente(paises):
 
-    continente = input("Continente: ").strip().lower()
+    continentes_validos = [
+        "america",
+        "europa",
+        "asia",
+        "africa",
+        "oceania"
+    ]
 
-    if not continente:
-        print("Debe ingresar un continente.")
-        return []
+    while True:
+
+        continente = input("Continente: ").strip().lower()
+
+        if not continente:
+            print("Debe ingresar un continente.")
+            continue
+
+        if not continente.isalpha():
+            print("Solo se permiten letras.")
+            continue
+
+        if continente not in continentes_validos:
+            print(
+                "Continente inválido. "
+                "Opciones: America, Europa, Asia, Africa u Oceania."
+            )
+            continue
+
+        break
 
     return [
         p for p in paises
@@ -32,18 +61,25 @@ def filtrar_continente(paises):
 def filtrar_poblacion(paises):
 
     while True:
+
         try:
-            minimo = int(input("Mínimo: "))
-            maximo = int(input("Máximo: "))
+
+            minimo = int(input("Minimo: "))
+            maximo = int(input("Maximo: "))
+
+            if minimo < 0 or maximo < 0:
+                print("Los valores no pueden ser negativos.")
+                continue
 
             if minimo > maximo:
-                print("El mínimo no puede ser mayor que el máximo.")
+                print("El minimo no puede ser mayor que el maximo.")
                 continue
 
             break
 
         except ValueError:
-            print("Debe ingresar números enteros.")
+
+            print("Debe ingresar numeros enteros.")
 
     return [
         p for p in paises
@@ -54,18 +90,25 @@ def filtrar_poblacion(paises):
 def filtrar_superficie(paises):
 
     while True:
+
         try:
-            minimo = int(input("Mínimo: "))
-            maximo = int(input("Máximo: "))
+
+            minimo = int(input("Minimo: "))
+            maximo = int(input("Maximo: "))
+
+            if minimo < 0 or maximo < 0:
+                print("Los valores no pueden ser negativos.")
+                continue
 
             if minimo > maximo:
-                print("El mínimo no puede ser mayor que el máximo.")
+                print("El minimo no puede ser mayor que el maximo.")
                 continue
 
             break
 
         except ValueError:
-            print("Debe ingresar números enteros.")
+
+            print("Debe ingresar numeros enteros.")
 
     return [
         p for p in paises
@@ -76,23 +119,25 @@ def filtrar_superficie(paises):
 def ordenar_paises(paises):
 
     print("1-Nombre")
-    print("2-Población")
+    print("2-Poblacion")
     print("3-Superficie")
 
     while True:
-        opcion = input("Opción: ")
 
-        if opcion in ("1", "2", "3"):
+        opcion = input("Opcion: ")
+
+        if opcion in ["1", "2", "3"]:
             break
 
-        print("Opción inválida.")
+        print("Opcion invalida.")
 
     while True:
+
         orden = input(
             "Ascendente(A) Descendente(D): "
-        ).upper()
+        ).strip().upper()
 
-        if orden in ("A", "D"):
+        if orden in ["A", "D"]:
             break
 
         print("Debe ingresar A o D.")
