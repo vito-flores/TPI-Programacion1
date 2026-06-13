@@ -16,7 +16,6 @@ def mostrar_menu():
 def main():
     lista_paises = archivos.cargar_csv("paises.csv")
 
-
     # Bucle principal del menú
     while True:
         mostrar_menu()
@@ -35,6 +34,7 @@ def main():
         elif opcion == "3":
             if not lista_paises:
                 print("No hay países cargados.")
+                continue
             resultados = filtros.buscar_pais(lista_paises)
             for p in resultados:
                 print(p)
@@ -42,6 +42,7 @@ def main():
         elif opcion == "4":
             if not lista_paises:
                 print("No hay países cargados.")
+                continue
             # Submenú de filtros
             print("\n--- FILTRAR POR ---")
             print("1. Continente")
@@ -65,6 +66,7 @@ def main():
         elif opcion == "5":
             if not lista_paises:
                 print("No hay países cargados.")
+                continue
             # ordenar_paises() maneja internamente el submenú de criterio y direcció
             resultado = filtros.ordenar_paises(lista_paises)
             for p in resultado:
@@ -74,6 +76,7 @@ def main():
             # Verificamos que haya países cargados antes de calcular
             if not lista_paises:
                 print("No hay países cargados.")
+                continue
             else:
                 estadisticas.estadisticas(lista_paises)
 

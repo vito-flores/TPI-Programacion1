@@ -9,8 +9,8 @@ def agregar_pais(lista_paises):
     while True:
         try:
             nombre = validaciones.validar_texto(input("Ingrese el nombre del país: "))
-            if not nombre or nombre.strip() == "" or not nombre.isalpha():
-                print("El nombre no puede estar vacío ni contener caracteres no alfabéticos.")
+            if not nombre or not nombre.strip():
+                print("El nombre no puede estar vacío.")
                 continue
 
             poblacion = int(input("Ingrese la población del país: "))
@@ -57,9 +57,15 @@ def actualizar_pais(lista_paises):
     for pais in lista_paises:
         if pais["nombre"].lower() == nombre.lower():
     
-            nueva_poblacion = validaciones.validar_numero(input("Ingrese la nueva población del país: "))
-            nueva_superficie = validaciones.validar_numero(input("Ingrese la nueva superficie del país: "))
-            
+            nueva_poblacion = validaciones.validar_numero(input("Ingrese la nueva población: "))
+            if nueva_poblacion is None:
+                print("Valor inválido, no se actualizó.")
+                return lista_paises
+
+            nueva_superficie = validaciones.validar_numero(input("Ingrese la nueva superficie: "))
+            if nueva_superficie is None:
+                print("Valor inválido, no se actualizó.")
+                return lista_paises
             #Cambiamos el valor del país encontrado por los nuevos valores ingresados
             pais["poblacion"] = nueva_poblacion
             pais["superficie"] = nueva_superficie

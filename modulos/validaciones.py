@@ -12,7 +12,11 @@ def validar_numero(numero):
             # Convierte el valor a entero
             numero = int(numero)
             # Retorna True si es positivo, de lo contrario False
-            return numero > 0
+            if numero > 0:
+                return numero
+            else:
+                print("El numero debe ser positivo")
+                return None
         except Exception as e:
             # Si no se puede convertir a entero, muestra el error
             print(f"Error al validar el número: {e}, ingrese un valor válido.")
@@ -29,21 +33,21 @@ def validar_continente(continente):
         print(f"Error al validar el continente: {continente} no es un continente válido.")
         return None
     
-def pedir_numero_positivo_obligatorio(numero):
-    while True:
-        try:
-            numero = int(input("Ingrese un número positivo: "))
-            return numero > 0
-        except Exception as e:
-            print(f"Error al validar el número: {e}, ingrese un valor válido.")
-            return None
+# def pedir_numero_positivo_obligatorio(numero):
+#     while True:
+#         try:
+#             numero = int(input("Ingrese un número positivo: "))
+#             return numero > 0
+#         except Exception as e:
+#             print(f"Error al validar el número: {e}, ingrese un valor válido.")
+#             return None
 
-def pedir_texto_obligatorio(texto):
-    while True:
-        try:
-            texto = input("Ingrese un texto: ")
-            if validar_texto(texto):
-                return texto
-        except Exception as e:
-            print(f"Error al validar el texto: {e}, ingrese un valor válido.")
-            return None
+# def pedir_texto_obligatorio(texto):
+#     while True:
+#         try:
+#             texto = input("Ingrese un texto: ")
+#             if validar_texto(texto):
+#                 return texto
+#         except Exception as e:
+#             print(f"Error al validar el texto: {e}, ingrese un valor válido.")
+#             return None
