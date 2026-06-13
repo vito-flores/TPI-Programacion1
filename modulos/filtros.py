@@ -1,16 +1,15 @@
 def buscar_pais(paises):
 
-    # Pedimos el nombre a buscar
-    texto = input("Nombre: ").lower()
+    texto = input("Nombre: ").strip().lower()
+
+    if not texto:
+        print("Debe ingresar un nombre.")
+        return []
 
     encontrados = []
 
-    # Recorremos la lista de países
     for pais in paises:
-
-        # Buscamos coincidencias parciales
         if texto in pais["nombre"].lower():
-
             encontrados.append(pais)
 
     return encontrados
@@ -18,8 +17,11 @@ def buscar_pais(paises):
 
 def filtrar_continente(paises):
 
-    # Filtra países por continente
-    continente = input("Continente: ").lower()
+    continente = input("Continente: ").strip().lower()
+
+    if not continente:
+        print("Debe ingresar un continente.")
+        return []
 
     return [
         p for p in paises
@@ -29,9 +31,19 @@ def filtrar_continente(paises):
 
 def filtrar_poblacion(paises):
 
-    # Filtra países por rango de población
-    minimo = int(input("Mínimo: "))
-    maximo = int(input("Máximo: "))
+    while True:
+        try:
+            minimo = int(input("Mínimo: "))
+            maximo = int(input("Máximo: "))
+
+            if minimo > maximo:
+                print("El mínimo no puede ser mayor que el máximo.")
+                continue
+
+            break
+
+        except ValueError:
+            print("Debe ingresar números enteros.")
 
     return [
         p for p in paises
@@ -41,9 +53,19 @@ def filtrar_poblacion(paises):
 
 def filtrar_superficie(paises):
 
-    # Filtra países por rango de superficie
-    minimo = int(input("Mínimo: "))
-    maximo = int(input("Máximo: "))
+    while True:
+        try:
+            minimo = int(input("Mínimo: "))
+            maximo = int(input("Máximo: "))
+
+            if minimo > maximo:
+                print("El mínimo no puede ser mayor que el máximo.")
+                continue
+
+            break
+
+        except ValueError:
+            print("Debe ingresar números enteros.")
 
     return [
         p for p in paises
@@ -53,19 +75,30 @@ def filtrar_superficie(paises):
 
 def ordenar_paises(paises):
 
-    # Menú de ordenamiento
     print("1-Nombre")
     print("2-Población")
     print("3-Superficie")
 
-    opcion = input("Opción: ")
-    orden = input(
-        "Ascendente(A) Descendente(D): "
-    ).upper()
+    while True:
+        opcion = input("Opción: ")
+
+        if opcion in ("1", "2", "3"):
+            break
+
+        print("Opción inválida.")
+
+    while True:
+        orden = input(
+            "Ascendente(A) Descendente(D): "
+        ).upper()
+
+        if orden in ("A", "D"):
+            break
+
+        print("Debe ingresar A o D.")
 
     reverse = orden == "D"
 
-    # Ordenar según el criterio elegido
     if opcion == "1":
 
         return sorted(
@@ -82,12 +115,10 @@ def ordenar_paises(paises):
             reverse=reverse
         )
 
-    elif opcion == "3":
+    else:
 
         return sorted(
             paises,
             key=lambda p: p["superficie"],
             reverse=reverse
         )
-
-    return paises
