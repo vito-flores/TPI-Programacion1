@@ -1,5 +1,5 @@
 from modulos import validaciones, archivos, paises, filtros, estadisticas
-
+import os
 
 #hace los prints generales del menu
 def mostrar_menu():
@@ -12,9 +12,12 @@ def mostrar_menu():
     print("6. Estadísticas")
     print("0. Salir")
 
+
 # Cargamos los países desde el CSV al iniciar el programa
 def main():
-    lista_paises = archivos.cargar_csv("paises.csv")
+    #carga exactamenre la ruta y el directorio en el que esta main.py, pero solo toma el directorio, alli se encuentre paises.csv
+    ruta_csv = os.path.join(os.path.dirname(__file__),"paises.csv")
+    lista_paises = archivos.cargar_csv(ruta_csv)
 
     # Bucle principal del menú
     while True:

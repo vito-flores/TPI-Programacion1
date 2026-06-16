@@ -21,8 +21,8 @@ def cargar_csv(nombre_archivo):
                     "poblacion": int(fila["poblacion"]),
                     "superficie": int(fila["superficie"]),
                     "continente": fila["continente"]
-                })
-            
+                    })
+            return paises
     #Se ejecuta si el archivo no se encuentra
     except FileNotFoundError:
         print("Archivo no encontrado")
