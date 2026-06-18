@@ -189,8 +189,9 @@ python main.py
 
 ## Video
 
-[PEGAR LINK]
+[video explicativo](https://www.youtube.com/watch?v=B6MIDQw-saE)
 
 ## Informe PDF
 
-https://github.com/vito-flores/TPI-Programacion1
+[Programación I – UTN TUPaD – Trabajo Practico Integrador.pdf](https://github.com/user-attachments/files/29072790/Programacion.I.UTN.TUPaD.Trabajo.Practico.Integrador.pdf)
+
